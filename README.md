@@ -22,5 +22,35 @@ You will be asked for a **prebuilt theme** name, we will use **Indigo/Pink**, al
 
 ## Creating a new component
 
-Run `ng generate component [compent-name]` to create a component which will contain an app feature.
+Run `ng generate component [compent-name]` to create a component which will contain an app feature. In this case we will create a *student* compenent.
+
+## Importing Material Modules
+
+In order to use Material, you must import their proper modules. For example we will import toolbar and icon modules. On the file `app.module.ts` add the following code in the header.
+
+```typescript
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+```
+
+Also add those modules inside **`@NgModule`**, so your code will look like this:
+
+```typescript
+@NgModule({
+  declarations: [
+    AppComponent,
+    StudentComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+```
+
 
