@@ -131,7 +131,7 @@ export class StudentComponent {
 }
 ```
 
-## Ading styles to your web app
+## Adding styles to your web app
 
 After testing your changes, you may see some visual glitches in your web app. The reason is that you need to add styles to your html components. If you know *CSS*, you can fix it yourself. If not, you can use this in your `student.component.ts` file:
 
@@ -156,4 +156,66 @@ table {
 }
 ```
 
+## Creating an Interface
 
+Run `ng generate interface models/student --type=model` this will generate an *interface* named *student* with type *model* in the folder *models*.
+
+If you don't know the difference between a class and an interface, I quote a definition
+
+>A class is a blueprint from which we can create objects that share the same configuration - properties and methods. An interface is a group of related properties and methods that describe an object, but neither provides implementation nor initialisation for them.
+
+After running the generation, you will find the `student.model.ts` file inside the *.\models* folder. In this file you will define your interface:
+
+```typescript
+export interface Student {
+  id: any;
+  name: any;
+  age: any;
+  mobile: any;
+  email: any;
+  address: any;
+}
+```
+
+## HTML Adaptation
+
+Now we will adapt the HTML table with the variables of the interface.
+
+`student.component.html`
+
+```html
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>ID.</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Nombre</th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="age">
+    <th mat-header-cell *matHeaderCellDef>Edad</th>
+    <td mat-cell *matCellDef="let element">{{ element.age }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="mobile">
+    <th mat-header-cell *matHeaderCellDef>Celular</th>
+    <td mat-cell *matCellDef="let element">{{ element.mobile }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef>Email</th>
+    <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="address">
+    <th mat-header-cell *matHeaderCellDef>Domicilio</th>
+    <td mat-cell *matCellDef="let element">{{ element.address }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+```
