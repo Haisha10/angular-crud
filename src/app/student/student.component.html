@@ -27,6 +27,67 @@
   </mat-toolbar>
 </p>
 
+<form (summit)="onSummit()" #studentForm="ngForm">
+  <mat-form-field>
+    <input
+      type="text"
+      matInput
+      placeholder="Nombre"
+      name="name"
+      required
+      [(ngModel)]="studentData.name"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      type="text"
+      matInput
+      placeholder="Edad"
+      name="age"
+      required
+      [(ngModel)]="studentData.age"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      type="text"
+      matInput
+      placeholder="Celular"
+      name="mobile"
+      required
+      [(ngModel)]="studentData.mobile"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      type="text"
+      matInput
+      placeholder="Email"
+      name="email"
+      required
+      [(ngModel)]="studentData.email"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      type="text"
+      matInput
+      placeholder="Domicilio"
+      name="address"
+      required
+      [(ngModel)]="studentData.address"
+    />
+  </mat-form-field>
+  <ng-container *ngIf="isEditMode; else elseTemplate">
+    <button mat-button color="primary">Update</button> &nbsp;
+    <button mat-button color="warn" (click)="cancelEdit()">Cancel</button>
+    &nbsp;
+  </ng-container>
+  <ng-template #elseTemplate>
+    <button mat-button color="primary">Add</button> &nbsp;
+  </ng-template>
+</form>
+
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef>ID.</th>

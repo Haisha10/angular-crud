@@ -219,3 +219,169 @@ Now we will adapt the HTML table with the variables of the interface.
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
 ```
+
+## ViewChild of Paginator and Sort
+
+We will add a ViewChild for the MatPaginator and the MatSort. Acording to Angular documentation:
+
+>Property decorator that configures a view query. The change detector looks for the first element or the directive matching the selector in the view DOM. If the view DOM changes, and a new child matches the selector, the property is updated.
+
+So your `student.component.ts` will look like this:
+
+```typescript
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { Student } from '../models/student.model';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+
+@Component({
+  selector: 'app-student',
+  templateUrl: './student.component.html',
+  styleUrls: ['./student.component.css']
+})
+export class StudentComponent {
+  dataSource = new MatTableDataSource();
+  displayedColumns: string[] = ['id', 'name', 'age', 'mobile', 'email', 'address', 'actions']
+  @ViewChild(MatPaginator, { static: true })
+  paginator!: MatPaginator;
+  isEditMode = false;
+
+  @ViewChild(MatSort)
+  sort!: MatSort;
+}
+```
+
+## Implementing a form
+
+In order to create a form you need to import the modules of forms and input.
+
+`app.module.ts`
+
+```typescript
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms'
+```
+
+`student.component.html`
+
+```html
+<form (summit)="onSummit()" #studentForm="ngForm">
+  <mat-form-field>
+    <input
+      type="text"
+      matInput
+      placeholder="Nombre"
+      name="name"
+      required
+      [(ngModel)]="studentData.name"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      type="text"
+      matInput
+      placeholder="Edad"
+      name="age"
+      required
+      [(ngModel)]="studentData.age"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      type="text"
+      matInput
+      placeholder="Celular"
+      name="mobile"
+      required
+      [(ngModel)]="studentData.mobile"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      type="text"
+      matInput
+      placeholder="Email"
+      name="email"
+      required
+      [(ngModel)]="studentData.email"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      type="text"
+      matInput
+      placeholder="Domicilio"
+      name="address"
+      required
+      [(ngModel)]="studentData.address"
+    />
+  </mat-form-field>
+  <ng-container *ngIf="isEditMode; else elseTemplate">
+    <button mat-button color="primary">Update</button> &nbsp;
+    <button mat-button color="warn" (click)="cancelEdit()">Cancel</button>
+    &nbsp;
+  </ng-container>
+  <ng-template #elseTemplate>
+    <button mat-button color="primary">Add</button> &nbsp;
+  </ng-template>
+</form>
+```
+
+`student.component.ts`
+```typescript
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { Student } from '../models/student.model';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { NgForm } from '@angular/forms';
+
+@Component({
+  selector: 'app-student',
+  templateUrl: './student.component.html',
+  styleUrls: ['./student.component.css']
+})
+export class StudentComponent {
+
+  @ViewChild('studentForm', { static: false })
+  studentForm!: NgForm;
+
+  studentData!: Student;
+
+  dataSource = new MatTableDataSource();
+  displayedColumns: string[] = ['id', 'name', 'age', 'mobile', 'email', 'address', 'actions']
+
+  @ViewChild(MatPaginator, { static: true })
+  paginator!: MatPaginator;
+  isEditMode = false;
+
+  @ViewChild(MatSort)
+  sort!: MatSort;
+
+  cancelEdit(){
+    this.isEditMode = false;
+    this.studentForm.resetForm();
+  }
+
+  onSummit(){
+    if(this.studentForm.form.valid){
+      console.log('Valid');
+      if(this.isEditMode){
+        console.log('Update');
+        //this.updateStudent();
+      }
+      else{
+        console.log('Create');
+        //this.addStudent();
+      }
+      this.cancelEdit();
+    }
+    else{
+      console.log('Invalid data');
+    }
+  }
+}
+```
+
