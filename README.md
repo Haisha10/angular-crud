@@ -26,11 +26,12 @@ Run `ng generate component [compent-name]` to create a component which will cont
 
 ## Importing Material Modules
 
-In order to use Material, you must import their proper modules. For example we will import toolbar and icon modules. On the file `app.module.ts` add the following code in the header.
+In order to use Material, you must import their proper modules. For example we will import toolbar, button and icon modules. On the file `app.module.ts` add the following code in the header.
 
 ```typescript
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 ```
 
 Also add those modules inside **`@NgModule`**, so your code will look like this:
@@ -46,11 +47,13 @@ Also add those modules inside **`@NgModule`**, so your code will look like this:
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
+export class AppModule { }
 ```
 
 And the HTML code inside **`student.component.html`**:
@@ -102,3 +105,55 @@ In order to see your previous coded toolbar, you will need to remove the default
 ```html
 <router-outlet></router-outlet>
 ```
+
+## Adding a table
+
+Add an [Angular Material Table](https://material.angular.io/components/table/overview) as learned before. Also import the paginator:
+
+```typescript
+import { MatPaginatorModule } from '@angular/material/paginator';
+```
+
+You may encounter some syntax errors from your IDE, thats because you will need some variables as parameters for your table. You define these variables in the `student.component.ts` file:
+
+```typescript
+import { Component } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table'
+
+@Component({
+  selector: 'app-student',
+  templateUrl: './student.component.html',
+  styleUrls: ['./student.component.css']
+})
+export class StudentComponent {
+  dataSource = new MatTableDataSource();
+  displayedColumns: string[] = ['id', 'name', 'age', 'mobile', 'email', 'address', 'actions']
+}
+```
+
+## Ading styles to your web app
+
+After testing your changes, you may see some visual glitches in your web app. The reason is that you need to add styles to your html components. If you know *CSS*, you can fix it yourself. If not, you can use this in your `student.component.ts` file:
+
+```css
+.mat-toolbar {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.exaple-icon {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+table {
+  width: 100%;
+}
+```
+
+
