@@ -215,6 +215,18 @@ Now we will adapt the HTML table with the variables of the interface.
     <td mat-cell *matCellDef="let element">{{ element.address }}</td>
   </ng-container>
 
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let element">
+      <a mat-raised-button color="accent" (click)="editItem(element)">
+        <mat-icon>Edit</mat-icon>
+      </a>
+      <a mat-raised-button color="warn" (click)="deleteItem(element.id)">
+        <mat-icon>Delete</mat-icon>
+      </a>
+    </td>
+  </ng-container>
+
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>

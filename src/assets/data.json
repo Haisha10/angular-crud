@@ -1,12 +1,10 @@
 {
-  "students": [
-    {
-      "id": 1,
-      "name": "Alvaro",
-      "age": 21,
-      "mobile": 987654321,
-      "email": "alvaro@upc.edu.pe",
-      "address": "Peru"
-    }
-  ]
+  "students": [{
+    "id": 1,
+    "name": "Alvaro",
+    "age": 21,
+    "mobile": 987654321,
+    "email": "alvaro@upc.edu.pe",
+    "address": "Peru"
+  }]
 }
