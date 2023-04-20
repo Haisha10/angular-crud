@@ -49,5 +49,4 @@ export class StudentComponent {
       console.log('Invalid data');
     }
   }
-
 }

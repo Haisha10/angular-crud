@@ -385,3 +385,43 @@ export class StudentComponent {
 }
 ```
 
+## Generating a Service
+
+Run `ng generate service services/http-data` to generate a *service* called *http-data* in the *services* folder.
+
+>Components shouldn't fetch or save data directly and they certainly shouldn't knowingly present fake data. They should focus on presenting data and delegate data access to a service.
+
+>Services are a great way to share information among classes that don't know each other.
+
+Also you will need to import the *HTTP Cliente Module* in `app.module.ts`
+
+```typescript
+import { HttpClientModule } from '@angular/common/http';
+```
+
+## Installing JSON-Server
+
+Run `npm install -g json-server` to install a server that will act as a data base based on a JSON file.
+
+Also create a **data.json** inside the *assets* folder.
+
+## Running JSON-Server
+
+Before running your json server you may add some data to your **data.json**, here is an example:
+
+```json
+{
+  "students": [
+    {
+      "id": 1,
+      "name": "Alvaro",
+      "age": 21,
+      "mobile": 987654321,
+      "email": "alvaro@upc.edu.pe",
+      "address": "Peru"
+    }
+  ]
+}
+```
+
+Then run `json-server --watch data.json`
