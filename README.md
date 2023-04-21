@@ -437,3 +437,7 @@ Before running your json server you may add some data to your **data.json**, her
 ```
 
 Then run `json-server --watch data.json`
+
+## Installing lodash
+
+Run `npm install lodash --save` and `npm install @types/lodash --save-dev`
