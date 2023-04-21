@@ -279,7 +279,7 @@ import { ReactiveFormsModule } from '@angular/forms'
 `student.component.html`
 
 ```html
-<form (summit)="onSummit()" #studentForm="ngForm">
+<form (submit)="onSubmit()" #studentForm="ngForm">
   <mat-form-field>
     <input
       type="text"
@@ -377,7 +377,7 @@ export class StudentComponent {
     this.studentForm.resetForm();
   }
 
-  onSummit(){
+  onSubmit(){
     if(this.studentForm.form.valid){
       console.log('Valid');
       if(this.isEditMode){

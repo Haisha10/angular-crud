@@ -44,7 +44,7 @@ export class StudentComponent {
     this.studentForm.resetForm();
   }
 
-  onSummit() {
+  onSubmit() {
     if (this.studentForm.form.valid) {
       console.log('Valid');
       if (this.isEditMode) {

@@ -27,7 +27,8 @@
   </mat-toolbar>
 </p>
 
-<form (summit)="onSummit()" #studentForm="ngForm">
+<!--Form-->
+<form (submit)="onSubmit()" #studentForm="ngForm">
   <mat-form-field>
     <input
       type="text"
@@ -88,6 +89,7 @@
   </ng-template>
 </form>
 
+<!--Table-->
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef>ID.</th>
@@ -135,9 +137,10 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
 
+<!--Paginator-->
 <mat-paginator
   [length]="100"
-  [pageSize]="10"
+  [pageSize]="30"
   [pageSizeOptions]="[5, 10, 25, 100]"
   aria-label="Select page"
 >
